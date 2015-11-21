@@ -87,6 +87,8 @@ class Blog extends admin {
 		$this->form_validation->set_rules('post_title', 'Post Name', 'required|xss_clean');
 		$this->form_validation->set_rules('post_status', 'Post Status', 'required|xss_clean');
 		$this->form_validation->set_rules('post_content', 'Post Description', 'required|xss_clean');
+		$this->form_validation->set_rules('post_video', 'Post video', 'xss_clean');
+		$this->form_validation->set_rules('post_audio', 'Post audio', 'xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -170,24 +172,40 @@ class Blog extends admin {
 	*/
 	public function edit_post($post_id) 
 	{
+		$posts_path = $this->posts_path;
+		$v_data['posts_path'] = $posts_path;
+		$query = $this->blog_model->get_post($post_id);
+		
+		if ($query->num_rows() > 0)
+		{
+			$v_data['post'] = $query->result();
+			$v_data['blog_category_id'] = $v_data['post'][0]->blog_category_id;
+		}
+		
+		else
+		{
+			$v_data['blog_category_id'] = '';
+		}
 		//form validation rules
 		$this->form_validation->set_rules('blog_category_id', 'Post Category', 'required|xss_clean');
 		$this->form_validation->set_rules('created', 'Post Date', 'required|xss_clean');
 		$this->form_validation->set_rules('post_title', 'Post Name', 'required|xss_clean');
 		$this->form_validation->set_rules('post_status', 'Post Status', 'required|xss_clean');
 		$this->form_validation->set_rules('post_content', 'Post Name', 'required|xss_clean');
+		$this->form_validation->set_rules('post_video', 'Post video', 'xss_clean');
+		$this->form_validation->set_rules('post_audio', 'Post Audio', 'xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{
+			$audio_name = $this->input->post('current_audio');
+				
 			//upload product's gallery images
 			$resize['width'] = 600;
 			$resize['height'] = 800;
 			
 			if(is_uploaded_file($_FILES['post_image']['tmp_name']))
 			{
-				$posts_path = $this->posts_path;
-				
 				//delete original image
 				$this->file_model->delete_file($posts_path."\\".$this->input->post('current_image'), $posts_path);
 				
@@ -250,11 +268,11 @@ class Blog extends admin {
 		$data['title'] = $v_data['title'] = 'Edit post';
 		
 		//select the post from the database
-		$query = $this->blog_model->get_post($post_id);
 		
 		if ($query->num_rows() > 0)
 		{
 			$v_data['post'] = $query->result();
+			$v_data['blog_category_id'] = $v_data['post'][0]->blog_category_id;
 			
 			$categories_query = $this->blog_model->get_all_active_categories();
 			if($categories_query->num_rows > 0)

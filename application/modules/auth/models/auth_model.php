@@ -10,7 +10,7 @@ class Auth_model extends CI_Model
 	{
 		//select the personnel by username from the database
 		$this->db->select('*');
-		$this->db->where(array('username' => $this->input->post('personnel_username'), 'activated' => 1, 'password' => md5($this->input->post('personnel_password'))));
+		$this->db->where(array('email' => $this->input->post('personnel_username'), 'activated' => 1, 'password' => md5($this->input->post('personnel_password'))));
 		$query = $this->db->get('users');
 		
 		//if personnel exists
@@ -21,7 +21,7 @@ class Auth_model extends CI_Model
 			$newdata = array(
                    'login_status'     => TRUE,
                    'first_name'     => $result[0]->first_name,
-                   'username'     => $result[0]->username,
+                   'email'     => $result[0]->email,
                    'personnel_id'  => $result[0]->user_id
                );
 

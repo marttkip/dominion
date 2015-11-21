@@ -97,5 +97,6 @@
 
 		<!-- Examples -->
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/javascripts/dashboard/examples.dashboard.js"></script>
+		<script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
 	</body>
 </html>

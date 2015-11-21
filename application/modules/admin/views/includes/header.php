@@ -31,6 +31,8 @@
 		<link rel="stylesheet" href="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/stylesheets/theme.css" />
 
 		<!-- Theme Custom CSS -->
+        <!-- CLEditor -->
+        <link rel="stylesheet" href="<?php echo base_url()."assets/themes/bluish";?>/style/jquery.cleditor.css">
 		
 
 		<!-- Head Libs -->

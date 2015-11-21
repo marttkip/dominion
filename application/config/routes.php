@@ -114,6 +114,8 @@ $route['deactivate-blog-category/(:num)'] = 'admin/blog/deactivate_blog_category
 $route['delete-comment/(:num)'] = 'admin/blog/delete_comment/$1';
 $route['activate-comment/(:num)'] = 'admin/blog/activate_comment/$1';
 $route['deactivate-comment/(:num)'] = 'admin/blog/deactivate_comment/$1';
+$route['blog-categories'] = 'admin/blog/categories';
+
 
 /*
 *	Categories Routes

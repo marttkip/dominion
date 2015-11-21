@@ -114,6 +114,8 @@ class Blog_model extends CI_Model
 		$data = array(
 				'post_title'=>ucwords(strtolower($this->input->post('post_title'))),
 				'post_status'=>$this->input->post('post_status'),
+				'post_video'=>$this->input->post('post_video'),
+				'post_audio'=>$this->input->post('post_audio'),
 				'post_content'=>$this->input->post('post_content'),
 				'blog_category_id'=>$this->input->post('blog_category_id'),
 				'created'=>$this->input->post('created'),
@@ -167,6 +169,8 @@ class Blog_model extends CI_Model
 		$data = array(
 				'post_title'=>ucwords(strtolower($this->input->post('post_title'))),
 				'post_status'=>$this->input->post('post_status'),
+				'post_video'=>$this->input->post('post_video'),
+				'post_audio'=>$this->input->post('post_audio'),
 				'post_content'=>$this->input->post('post_content'),
 				'blog_category_id'=>$this->input->post('blog_category_id'),
 				'created'=>$this->input->post('created'),
