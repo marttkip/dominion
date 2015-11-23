@@ -33,13 +33,16 @@ class Login extends MX_Controller {
 	public function register_professional()
 	{
 		$this->form_validation->set_error_delimiters('', '');
-
-				
+		
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('ministry', 'Ministry', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('leadership_position', 'Leadership Position', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('professional_body', 'Email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('ministry', 'Ministry', 'trim|xss_clean');
+		$this->form_validation->set_rules('leadership_position', 'Leadership Position', 'trim|xss_clean');
+		$this->form_validation->set_rules('college', 'College', 'trim|xss_clean');
+		$this->form_validation->set_rules('professional_body', 'Professional Body', 'trim|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('city', 'City', 'trim|xss_clean');
+		$this->form_validation->set_rules('country', 'Country', 'trim|xss_clean');
 		
 		//if form conatins invalid data
 		if ($this->form_validation->run())
@@ -81,13 +84,16 @@ class Login extends MX_Controller {
 	public function register_influencer()
 	{
 		$this->form_validation->set_error_delimiters('', '');
-
-				
+		
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('ministry', 'Ministry', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('leadership_position', 'Leadership Position', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('professional_body', 'Professional Body', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('ministry', 'Ministry', 'trim|xss_clean');
+		$this->form_validation->set_rules('leadership_position', 'Leadership Position', 'trim|xss_clean');
+		$this->form_validation->set_rules('professional_body', 'Professional Body', 'trim|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('city', 'City', 'trim|xss_clean');
+		$this->form_validation->set_rules('country', 'Country', 'trim|xss_clean');
 		
 		//if form conatins invalid data
 		if ($this->form_validation->run())
@@ -95,15 +101,14 @@ class Login extends MX_Controller {
 			$status = $this->login_model->register_influencer_details();
 			if($status == TRUE)
 			{
-				
-					$response['message'] = 'success';
-					$response['result'] = 'You have successfully registered as a DG Young Profession';
+				$response['message'] = 'success';
+				$response['result'] = 'You have successfully registered as a DG Young Profession';
 			}
 			
 			else
 			{
-					$response['message'] = 'fail';
-					$response['result'] = 'Unable to create account. Please try again';
+				$response['message'] = 'fail';
+				$response['result'] = 'Unable to create account. Please try again';
 			}
 		}
 		else
@@ -129,13 +134,14 @@ class Login extends MX_Controller {
 	public function register_investor()
 	{
 		$this->form_validation->set_error_delimiters('', '');
-
-				
-		$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('ministry', 'Ministry', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('leadership_position', 'Leadership Position', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('professional_body', 'Email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+		
+		$this->form_validation->set_rules('first_name', 'Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('leadership_position', 'Profession', 'trim|xss_clean');
+		$this->form_validation->set_rules('professional_body', 'Ministry', 'trim|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('city', 'City', 'trim|xss_clean');
+		$this->form_validation->set_rules('country', 'Country', 'trim|xss_clean');
 		
 		//if form conatins invalid data
 		if ($this->form_validation->run())

@@ -47,6 +47,25 @@ class News extends MX_Controller {
 		
 		echo json_encode($response);
 	}
+    
+	/*
+	*
+	*	Default action is to go to the home page
+	*
+	*/
+	public function get_blog_items($blog_category_id) 
+	{
+		$query = $this->news_model->get_blog_items($blog_category_id);
+		
+		$v_data['query'] = $query;
+		$data['total'] = $query->num_rows();
+
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('news', $v_data, true);
+
+		
+		echo json_encode($response);
+	}
 	
 	public function get_news_detail($id)
 	{

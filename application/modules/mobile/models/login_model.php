@@ -37,14 +37,14 @@ class Login_model extends CI_Model
 
 			$data['member_email'] = $this->input->post('email');
 			$data['member_name'] = $this->input->post('name');
-			$data['member_profession'] = $this->input->post('leadership_profession');
+			$data['member_ministry'] = $this->input->post('ministry');
+			$data['member_profession'] = $this->input->post('leadership_position');
 			$data['member_college'] = $this->input->post('college');
 			$data['member_professional_body'] = $this->input->post('professional_body');
-			$data['member_country'] = $this->input->post('county');
 			$data['member_address'] = $this->input->post('address');
 			$data['member_city'] = $this->input->post('city');
 			$data['member_country'] = $this->input->post('country');
-			$data['member_type'] = 2;
+			$data['member_type'] = 26;
 			if($this->db->insert('member', $data))
 			{
 				return TRUE;
@@ -71,16 +71,16 @@ class Login_model extends CI_Model
 		{
 			// do an insert
 
-			$data['member_email'] = $this->input->post('email');
 			$data['member_name'] = $this->input->post('name');
-			$data['member_profession'] = $this->input->post('leadership_profession');
-			$data['member_college'] = $this->input->post('college');
+			$data['member_ministry'] = $this->input->post('ministry');
+			$data['member_profession'] = $this->input->post('leadership_position');
 			$data['member_professional_body'] = $this->input->post('professional_body');
-			$data['member_country'] = $this->input->post('county');
+			$data['member_email'] = $this->input->post('email');
+			$data['member_phone'] = $this->input->post('phone');
 			$data['member_address'] = $this->input->post('address');
 			$data['member_city'] = $this->input->post('city');
 			$data['member_country'] = $this->input->post('country');
-			$data['member_type'] = 1;
+			$data['member_type'] = 25;
 			if($this->db->insert('member', $data))
 			{
 				return TRUE;
@@ -107,16 +107,14 @@ class Login_model extends CI_Model
 		{
 			// do an insert
 
+			$data['member_name'] = $this->input->post('first_name');
+			$data['member_ministry'] = $this->input->post('professional_body');
+			$data['member_profession'] = $this->input->post('leadership_position');
 			$data['member_email'] = $this->input->post('email');
-			$data['member_name'] = $this->input->post('name');
-			$data['member_profession'] = $this->input->post('leadership_profession');
-			$data['member_college'] = $this->input->post('college');
-			$data['member_professional_body'] = $this->input->post('professional_body');
-			$data['member_country'] = $this->input->post('county');
 			$data['member_address'] = $this->input->post('address');
 			$data['member_city'] = $this->input->post('city');
 			$data['member_country'] = $this->input->post('country');
-			$data['member_type'] = 3;
+			$data['member_type'] = 27;
 			if($this->db->insert('member', $data))
 			{
 				return TRUE;
