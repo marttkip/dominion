@@ -35,6 +35,54 @@ class Initiatives extends MX_Controller {
 	*/
 	public function get_initiatives() 
 	{
+		$query = $this->initiatives_model->get_initiatives(12);
+		
+		$v_data['query'] = $query;
+
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('initiative', $v_data, true);
+
+		
+		echo json_encode($response);
+	}
+
+	public function get_initiative_page($id)
+	{
+
+		if($id == 26)
+		{
+			// economic
+
+			$passed_items = 13;
+		}
+		else if($id == 27)
+		{
+			// social
+			$passed_items = 14;
+		}
+		else
+		{
+			// spiritual
+			$passed_items = 15;			
+		}
+		
+		$query = $this->initiatives_model->get_initiatives($passed_items);
+		
+		$v_data['query'] = $query;
+
+		$v_data['parent_id'] = $id;
+		$v_data['initiative_page_query'] = $this->initiatives_model->get_initiative_detail($id);
+
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('initiative_page', $v_data, true);
+
+		
+		echo json_encode($response);
+
+	}
+	
+	public function get_initiatives_old()
+	{
 		$query = $this->initiatives_model->get_initiatives(13);
 		$corporates = $this->initiatives_model->get_initiatives(14);
 		$learning = $this->initiatives_model->get_initiatives(15);
@@ -52,13 +100,16 @@ class Initiatives extends MX_Controller {
 		
 		echo json_encode($response);
 	}
-	
-	public function get_initiative_detail($id)
+
+	public function get_initiative_detail($id,$parent_id)
 	{
 		$query = $this->initiatives_model->get_initiative_detail($id);
 		
+		
+		
 		$v_data['query'] = $query;
 		$v_data['id'] = $id;
+		$v_data['parent_id'] = $parent_id;
 		$response['message'] = 'success';
 		$response['result'] = $this->load->view('initiative_detail', $v_data, true);
 

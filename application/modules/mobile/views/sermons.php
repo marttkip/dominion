@@ -27,7 +27,7 @@ if ($query->num_rows() > 0)
 						<span class="month">'.$month.'</span>
 					</div>
 					<div class="post_title">
-					<h2><a href="blog-single.html?id='.$id.'" onclick="get_news_description('.$id.')">'.strip_tags($mini_title).'</a></h2>
+					<h2><a href="sermon.html?id='.$id.'" onclick="get_sermons_description('.$id.')">'.strip_tags($mini_title).'</a></h2>
 					</div>
 				</div>
 			</li>';
