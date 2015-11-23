@@ -52,7 +52,7 @@ class Login extends MX_Controller {
 			{
 				
 					$response['message'] = 'success';
-					$response['result'] = 'You have successfully registered as a DG Young Profession';
+					$response['result'] = $this->input->post('email');
 			}
 			
 			else
@@ -102,7 +102,7 @@ class Login extends MX_Controller {
 			if($status == TRUE)
 			{
 				$response['message'] = 'success';
-				$response['result'] = 'You have successfully registered as a DG Young Profession';
+				$response['result'] = $this->input->post('email');
 			}
 			
 			else
@@ -150,8 +150,8 @@ class Login extends MX_Controller {
 			if($status == TRUE)
 			{
 				
-					$response['message'] = 'success';
-					$response['result'] = 'You have successfully registered as a DG Young Profession';
+				$response['message'] = 'success';
+				$response['result'] = $this->input->post('email');
 			}
 			
 			else

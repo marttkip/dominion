@@ -24,7 +24,7 @@ class Login_model extends CI_Model
 	{
 		// AND username = "'.$this->input->post('member_no').'"
 		$this->db->select('*');
-		$this->db->where('member_email = "'.$this->input->post('email').'"');
+		$this->db->where('member_email = "'.$this->input->post('email').'" AND member_type = 26');
 		$query = $this->db->get('member');
 
 		if($query->num_rows() > 0)
@@ -60,7 +60,7 @@ class Login_model extends CI_Model
 	{
 		// AND username = "'.$this->input->post('member_no').'"
 		$this->db->select('*');
-		$this->db->where('member_email = "'.$this->input->post('email').'"');
+		$this->db->where('member_email = "'.$this->input->post('email').'" AND member_type = 25');
 		$query = $this->db->get('member');
 
 		if($query->num_rows() > 0)
@@ -96,7 +96,7 @@ class Login_model extends CI_Model
 	{
 		// AND username = "'.$this->input->post('member_no').'"
 		$this->db->select('*');
-		$this->db->where('member_email = "'.$this->input->post('email').'"');
+		$this->db->where('member_email = "'.$this->input->post('email').'" AND member_type = 27');
 		$query = $this->db->get('member');
 
 		if($query->num_rows() > 0)

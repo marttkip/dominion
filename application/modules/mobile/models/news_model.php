@@ -42,5 +42,46 @@ class News_model extends CI_Model
 
 		return $query->num_rows();	
 	}
-
+	
+	/*
+	*	Retrieve comments
+	* 	@param int $post_id
+	*
+	*/
+	public function get_post_comments($post_id)
+	{
+		//retrieve all users
+		$this->db->from('post_comment');
+		$this->db->select('post_comment.*');
+		$this->db->where('post_comment_status = 1 AND post_id = '.$post_id);
+		$this->db->order_by('comment_created', 'ASC');
+		$query = $this->db->get();
+		
+		return $query;
+	}
+	
+	/*
+	*	Add a new comment
+	*	@param int $post_id
+	*
+	*/
+	public function add_comment_user()
+	{
+		$data = array(
+				'post_comment_description'=>$this->input->post('comment'),
+				'comment_created'=>date('Y-m-d H:i:s'),
+				'post_comment_user'=>$this->input->post('name'),
+				'post_comment_email'=>$this->input->post('email'),
+				'post_comment_status'=>1,
+				'post_id'=>$this->input->post('post_id')
+			);
+			
+		if($this->db->insert('post_comment', $data))
+		{
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 }

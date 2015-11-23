@@ -61,7 +61,7 @@ class News extends MX_Controller {
 		$data['total'] = $query->num_rows();
 
 		$response['message'] = 'success';
-		$response['result'] = $this->load->view('news', $v_data, true);
+		$response['result'] = $this->load->view('blog', $v_data, true);
 
 		
 		echo json_encode($response);
@@ -70,6 +70,7 @@ class News extends MX_Controller {
 	public function get_news_detail($id)
 	{
 		$query = $this->news_model->get_news_detail($id);
+		$v_data['comments_query'] = $this->news_model->get_post_comments($id);
 		
 		$v_data['query'] = $query;
 		$v_data['id'] = $id;
@@ -87,6 +88,41 @@ class News extends MX_Controller {
 		
 		echo json_encode($data);
 	}
-	
-	
+    
+	/*
+	*
+	*	Add a new comment
+	*
+	*/
+	public function save_comment() 
+	{
+		//form validation rules
+		$this->form_validation->set_rules('comment', 'Comment', 'required|xss_clean');
+		$this->form_validation->set_rules('name', 'Name', 'xss_clean');
+		$this->form_validation->set_rules('post_id', 'post_id', 'xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'valid_email|xss_clean');
+		
+		//if form has been submitted
+		if ($this->form_validation->run() == FALSE)
+		{
+			$response['message'] = 'fail';
+			$response['result'] = validation_errors();
+		}
+		
+		else
+		{
+			if($this->news_model->add_comment_user())
+			{
+				$response['message'] = 'success';
+				$response['result'] = '<li class="comment_row"><div class="comm_avatar"><img src="images/icons/black/user.png" alt="" title="" border="0" /></div><div class="comm_content"><p>'.$this->input->post('comment').' by <a href="#">'.$this->input->post('name').'</a></p></div></li>';
+			}
+			
+			else
+			{
+				$response['message'] = 'fail';
+				$response['result'] = 'Could not add comment. Please try again';
+			}
+		}
+		echo json_encode($response);
+	}
 }
