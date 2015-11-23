@@ -16,8 +16,8 @@
 | environments.
 |
 */
-#$config['base_url'] = 'http://localhost/dominion/';
-$config['base_url'] = 'http://dominion.autospares.co.ke/';
+$config['base_url'] = 'http://localhost/dominion/';
+// $config['base_url'] = 'http://dominion.autospares.co.ke/';
 
 /*
 |--------------------------------------------------------------------------
