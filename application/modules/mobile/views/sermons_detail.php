@@ -23,6 +23,9 @@ if ($query->num_rows() > 0)
 	$result .= '
 	<div class="page_content"> 
 		<blockquote>'.strip_tags($title).'</blockquote>
+		<div class="post_social2">
+			<a href="#" class="share_post"><img src="images/share.png" alt="" title="" /></a>              
+		</div> 
 		<img src="'.base_url().'assets/img/posts/'.$post_image.'" alt="" title="" />';
 		if(!empty($post_audio))
 		{
@@ -46,6 +49,10 @@ if ($query->num_rows() > 0)
 		}
 		$result .='<p>'.$post_content.'</p>
 	</div>
+	
+	<input type="hidden" id="title" value="'.$title.'"/>
+	<input type="hidden" id="image" value="'.base_url().'assets/img/posts/'.$post_image.'"/>
+	<input type="hidden" id="content" value="'.strip_tags($post_content).'"/>
 	
 	<blockquote>
 	</blockquote>';

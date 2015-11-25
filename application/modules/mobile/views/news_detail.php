@@ -41,11 +41,21 @@ if ($query->num_rows() > 0)
             <div class="featured_image">
               <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
               <div class="post_title_single"><h2>'.$title.'</h2></div>
+              <div class="post_social">
+              	<a href="#" class="share_post"><img src="images/share.png" alt="" title="" /></a>              
+              </div>
             </div>
                  
             <div class="page_content"> 
               <div class="entry">
               	'.$post_content.'
+				<input type="hidden" id="title" value="'.$title.'"/>
+				<input type="hidden" id="image" value="'.$image.'"/>
+				<input type="hidden" id="content" value="'.strip_tags($post_content).'"/>
+              </div>
+			  
+			  <div class="post_social2">
+              	Share <a href="#" class="share_post"><img src="images/share.png" alt="" title="" /></a>              
               </div>
             </div>
             
