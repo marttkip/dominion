@@ -20,10 +20,9 @@ $result = '';
                 $result .='
                    <li>
                       <div class="feat_small_details" style="margin:0 45px 3px;">
-                      <h4>'.$title.'</h4>
-                      <a href="initiative-page.html?id='.$id.'" onclick="get_initiative_page('.$id.')">'.$mini_string .'...</a>
+                      
+                      <a href="initiative-page.html?id='.$id.'" onclick="get_initiative_page('.$id.')"><h4>'.$title.'</h4></a>
                       </div>
-                      <div class="view_more"><a href="initiative-page.html?id='.$id.'" onclick="get_initiative_page('.$id.')"><img src="images/load_posts_disabled.png" alt="" title="" /></a></div>
                </li>
                ';
           }
