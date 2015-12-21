@@ -15,6 +15,11 @@ class Bible_school_model extends CI_Model
 		
 		return $query;
 	}
-	
+	public function get_college_detail($id)
+	{
+		$this->db->where('post_id = '.$id);
+		$query = $this->db->get('post');
+		return $query;
+	}
 
 }

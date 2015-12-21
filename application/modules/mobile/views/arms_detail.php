@@ -50,7 +50,7 @@ $new_items = $this->arms_model->get_arms_news_items($news_category);
 $news_item_post ='';
 if ($new_items->num_rows() > 0)
 {
-            
+	$news_item_post .='<ul class="posts">';
 	foreach ($new_items->result() as $news_items_row)
 	{
 		$id = $news_items_row->post_id;
@@ -63,24 +63,28 @@ if ($new_items->num_rows() > 0)
 		$post_image = $news_items_row->post_image;
 		$mini_string = (strlen($post_content) > 15) ? substr($post_content,0,50).'...' : $post_content;
 		$mini_title = (strlen($title) > 15) ? substr($title,0,50).'...' : $title;
-		$news_item_post .= '
-				<div class="accordion-item">
-                    <div class="accordion-item-toggle">
-                      <i class="icon icon-plus">+</i>
-                      <i class="icon icon-minus">-</i>
-                      <span>'.$title.'</span>
-                    </div>
-                    <div class="accordion-item-content">
-                           '.$post_content.'
-                    </div>
-                  </div>
-              ';
+		$news_item_post .='
+			
+			<li>
+				<div class="post_entry">
+					<div class="post_date">
+						<span class="day">'.$day.'</span>
+						<span class="month">'.$month.'</span>
+					</div>
+					<div class="post_title">
+					<h2><a href="sermon.html?id='.$id.'" onclick="get_sermons_description('.$id.')">'.strip_tags($mini_title).'</a></h2>
+					</div>
+				</div>
+			</li>';
 	}
-	
+	$news_item_post .='</ul>';
 }else
 {
 	$news_item_post = 'Data not found';
 }
+
+
+
 
 
 $events_items = $this->arms_model->get_arms_events_items($events_category);
@@ -90,6 +94,7 @@ $events_item_post ='';
 if ($events_items->num_rows() > 0)
 {
             
+    $events_item_post .='<ul class="posts">';
 	foreach ($events_items->result() as $events_items_row)
 	{
 		$id = $events_items_row->post_id;
@@ -101,19 +106,21 @@ if ($events_items->num_rows() > 0)
 		$post_image = $events_items_row->post_image;
 		$mini_string = (strlen($post_content) > 15) ? substr($post_content,0,50).'...' : $post_content;
 		$mini_title = (strlen($title) > 15) ? substr($title,0,50).'...' : $title;
+
 		$events_item_post .='
-				<div class="accordion-item">
-                    <div class="accordion-item-toggle">
-                      <i class="icon icon-plus">+</i>
-                      <i class="icon icon-minus">-</i>
-                      <span>'.$title.'</span>
-                    </div>
-                    <div class="accordion-item-content">
-                    	
-                           '.$post_content.'
-                    </div>
-                  </div>
-              ';
+			
+			<li>
+				<div class="post_entry">
+					<div class="post_date">
+						<span class="day">'.$day.'</span>
+						<span class="month">'.$month.'</span>
+					</div>
+					<div class="post_title">
+					<h2><a href="sermon.html?id='.$id.'" onclick="get_sermons_description('.$id.')">'.strip_tags($mini_title).'</a></h2>
+					</div>
+				</div>
+			</li>';
+		$events_item_post .='</ul>';
 	}
 	
 }else

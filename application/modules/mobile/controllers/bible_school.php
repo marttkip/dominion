@@ -26,6 +26,7 @@ class Bible_school extends MX_Controller {
 		}
 		
 		$this->load->model('bible_school_model');
+		$this->load->model('arms_model');
 		$this->load->model('email_model');
 	}
 	
@@ -41,6 +42,20 @@ class Bible_school extends MX_Controller {
 		echo json_encode($response);
 
 	}
+
+
+	public function get_college_details($id)
+	{
+		$query = $this->bible_school_model->get_college_detail($id);
+		
+		$v_data['query'] = $query;
+		$v_data['id'] = $id;
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('college_detail', $v_data, true);
+		echo json_encode($response);
+
+	}
+	
 	
 	
 }
