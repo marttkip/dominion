@@ -48,7 +48,6 @@ class Initiatives extends MX_Controller {
 
 	public function get_initiative_page($id)
 	{
-
 		if($id == 26)
 		{
 			// economic

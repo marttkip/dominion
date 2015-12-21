@@ -50,6 +50,67 @@ class Sermons extends MX_Controller {
     
 	/*
 	*
+	*	Get new sermons
+	*
+	*/
+	public function get_new_sermons($last_post) 
+	{
+		$query = $this->sermons_model->get_new_sermons($last_post);
+		$posts = '';
+		$post_title = '';
+		$message = 'no new';
+		
+		if($query->num_rows() > 0)
+		{
+			$count = 0;
+			$message = 'new';
+			$posts .= "INSERT INTO post (post_id, post_title, post_content, created, post_status, post_views, post_image, created_by, modified_by, last_modified, post_thumb, post_comments, blog_category_id, tiny_url, post_video, post_audio, created_status, read_status) VALUES";
+			foreach($query->result() as $row)
+			{
+				$count++;
+				$post_id = $row->post_id;
+				$post_title = $row->post_title;
+				$post_content = $row->post_content;
+				$post_image = $row->post_image;
+				$post_audio = $row->post_audio;
+				$post_video = $row->post_video;
+				$post_status = $row->post_status;
+				$post_views = $row->post_views;
+				$created = $row->created;
+				$created_by = $row->created_by;
+				$modified_by = $row->modified_by;
+				$last_modified = $row->last_modified;
+				$post_thumb = $row->post_thumb;
+				$post_comments = $row->post_comments;
+				$blog_category_id = $row->blog_category_id;
+				$tiny_url = $row->tiny_url;
+				$post_video = $row->post_video;
+				$post_audio = $row->post_audio;
+				$created_status = $row->created_status;
+				$read_status = $row->read_status;
+				
+				if($count == $query->num_rows())
+				{
+					$posts .= "(".$post_id.", '".$post_title."', '".$post_content."', '".$created."', ".$post_status.", ".$post_views.", '".$post_image."', ".$created_by.", ".$modified_by.", '".$last_modified."', '".$post_thumb."', ".$post_comments.", ".$blog_category_id.", '".$tiny_url."', '".$post_video."', '".$post_audio."', ".$created_status.", ".$read_status.")";
+				}
+				
+				else
+				{
+					$posts .= "(".$post_id.", '".$post_title."', '".$post_content."', '".$created."', ".$post_status.", ".$post_views.", '".$post_image."', ".$created_by.", ".$modified_by.", '".$last_modified."', '".$post_thumb."', ".$post_comments.", ".$blog_category_id.", '".$tiny_url."', '".$post_video."', '".$post_audio."', ".$created_status.", ".$read_status."), ";
+				}
+			}
+		}
+
+		$response['message'] = $message;
+		$response['post_title'] = $post_title;
+		$response['result'] = $posts;
+
+		
+		echo json_encode($response);
+	}
+    
+	/*
+	*
 	*	Latest sermon
 	*
 	*/

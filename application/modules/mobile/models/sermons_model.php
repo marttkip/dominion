@@ -16,6 +16,15 @@ class Sermons_model extends CI_Model
 		return $query;
 	}
 	
+	public function get_new_sermons($last_post)
+	{
+		$this->db->where('post_id > '.$last_post);
+	 	$this->db->order_by('last_modified','DESC');
+		$query = $this->db->get('post');
+		
+		return $query;
+	}
+	
 	public function get_latest_sermon()
 	{
 		$this->db->where('blog_category_id = 9');
