@@ -138,19 +138,55 @@ class Event_model extends CI_Model
 	
 	public function get_active_events($limit = NULL)
 	{
-  		$table = "event";
-		$where = "event_status = 1";
+		$date = date('Y-m-d');
+  		$table = "post";
+		$where = "blog_category_id = 5 AND POST_status = 1";
 		
 		$this->db->where($where);
-		
+		$this->db->order_by('last_modified', 'ASC');
+		//$this->db->group_by('event_start_time');
 		if($limit == NULL)
 		{
 			$query = $this->db->get($table);
 		}
 		else
 		{
-			$query = $this->db->get($table, $limit);
+			$this->db->limit($limit);
+			$query = $this->db->get($table);
 		}
+		
+		return $query;
+	}
+
+	/*
+	*	Update user's last login date
+	*
+	*/
+	public function get_initiatives($limit = NULL)
+	{
+		$category_id = 12;
+		$table = 'post';
+		$this->db->where('post_status = 1 AND blog_category_id = '.$category_id);
+	 	$this->db->order_by('last_modified','DESC');
+		if($limit == NULL)
+		{
+			$query = $this->db->get($table);
+		}
+		else
+		{
+			$this->db->limit($limit);
+			$query = $this->db->get($table);
+		}
+		
+		return $query;
+	}
+	
+	public function get_latest_sermons()
+	{
+		$this->db->where('blog_category_id = 9');
+	 	$this->db->order_by('last_modified','DESC');
+		$this->db->limit(3);
+		$query = $this->db->get('post');
 		
 		return $query;
 	}

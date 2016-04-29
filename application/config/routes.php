@@ -40,8 +40,20 @@
 |
 */
 
-$route['default_controller'] = "auth";
+$route['default_controller'] = "site";
 $route['404_override'] = '';
+
+/*
+*	Site Routes
+*/
+$route['home'] = 'site/home_page';
+$route['about'] = 'site/about';
+$route['services'] = 'site/services';
+$route['services/(:any)/(:any)'] = 'site/view_service/$2';
+$route['services/(:any)'] = 'site/services/$1';
+$route['loans'] = 'site/loans';
+$route['blog'] = 'site/blog';
+$route['contact-us'] = 'site/contact';
 
 /*
 *	Auth Routes
@@ -53,6 +65,22 @@ $route['logout-admin'] = 'auth/logout';
 *	Admin Routes
 */
 $route['dashboard'] = 'admin/dashboard';
+$route['website/slideshow'] = 'admin/slideshow/index';
+$route['website/gallery'] = 'admin/gallery/index';
+$route['administration/all-slides'] = 'admin/slideshow/index';
+$route['administration/all-slides/(:num)'] = 'admin/slideshow/index/$1';//with a page number
+$route['administration/add-slide'] = 'admin/slideshow/add_slide';
+$route['administration/edit-slide/(:num)/(:num)'] = 'admin/slideshow/edit_slide/$1/$2';
+$route['administration/activate-slide/(:num)/(:num)'] = 'admin/slideshow/activate_slide/$1/$2';
+$route['administration/deactivate-slide/(:num)/(:num)'] = 'admin/slideshow/deactivate_slide/$1/$2';
+$route['administration/delete-slide/(:num)/(:num)'] = 'admin/slideshow/delete_slide/$1/$2';
+$route['administration/all-gallery-images'] = 'admin/gallery/index';
+$route['administration/all-gallery-images/(:num)'] = 'admin/gallery/index/$1';//with a page number
+$route['administration/add-gallery'] = 'admin/gallery/add_gallery';
+$route['administration/edit-gallery/(:num)/(:num)'] = 'admin/gallery/edit_gallery/$1/$2';
+$route['administration/activate-gallery/(:num)/(:num)'] = 'admin/gallery/activate_gallery/$1/$2';
+$route['administration/deactivate-gallery/(:num)/(:num)'] = 'admin/gallery/deactivate_gallery/$1/$2';
+$route['administration/delete-gallery/(:num)/(:num)'] = 'admin/gallery/delete_gallery/$1/$2';
 
 /*
 *	administration Routes

@@ -9,6 +9,10 @@
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
 	font-weight: 400;
 }
+<<<<<<< HEAD
+.math{background:url(../../../images/geometry.png) repeat;}
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 
 .navbar *{
 	background-image: none !important;

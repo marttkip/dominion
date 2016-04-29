@@ -12,6 +12,8 @@ class Slideshow extends admin {
 		$this->load->model('users_model');
 		$this->load->model('slideshow_model');
 		$this->load->model('file_model');
+		$this->load->model('department_model');
+		$this->load->library('image_lib');
 		
 		//path to image directory
 		$this->slideshow_path = realpath(APPPATH . '../assets/slideshow');
@@ -64,6 +66,7 @@ class Slideshow extends admin {
         $data["links"] = $this->pagination->create_links();
 		$query = $this->slideshow_model->get_all_slides($table, $where, $config["per_page"], $page);
 		
+		$data['title'] = $v_data['title'] = 'Slideshow';
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
@@ -76,9 +79,8 @@ class Slideshow extends admin {
 		{
 			$data['content'] = '<a href="'.site_url().'administration/add-slide" class="btn btn-success pull-right">Add Slide</a>There are no slides';
 		}
-		$data['title'] = 'Slideshow';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function add_slide()
@@ -141,10 +143,10 @@ class Slideshow extends admin {
 		}
 		$v_data['error'] = $slideshow_error;
 		
+		$data['title'] = $v_data['title'] = 'Add Slide';
 		$data['content'] = $this->load->view("slideshow/add_slide", $v_data, TRUE);
-		$data['title'] = 'Add Slide';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function edit_slide($slideshow_id, $page)
@@ -217,10 +219,10 @@ class Slideshow extends admin {
 		}
 		$v_data['error'] = $slideshow_error;
 		
+		$data['title'] = $v_data['title'] = 'Edit Slide';
 		$data['content'] = $this->load->view("slideshow/edit_slide", $v_data, TRUE);
-		$data['title'] = 'Edit Slide';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
     
 	/*

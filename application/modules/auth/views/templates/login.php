@@ -57,7 +57,7 @@
 								echo '<div class="alert alert-danger">'.$login_error.'</div>';
 							}
 						?>
-							<form action="<?php echo site_url().$this->uri->uri_string();?>" method="post">
+							<form action="<?php echo site_url().'auth/login_user';?>" method="post">
                         	<?php
 								//case of an input error
 								if(!empty($personnel_username_error))
@@ -123,10 +123,6 @@
 								{
 									?>
 									<div class="form-group mb-lg">
-                                        <div class="clearfix">
-                                            <label class="pull-left">Password</label>
-                                            <a href="#" class="pull-right"> Lost Password?</a>
-                                        </div>
                                         <div class="input-group input-group-icon">
                                             <input name="personnel_password" type="password" class="form-control input-lg" value="<?php echo $personnel_password;?>" />
                                             <span class="input-group-addon">
@@ -167,7 +163,6 @@
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/jquery/jquery.js"></script>		
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>		
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/jquery-cookie/jquery.cookie.js"></script>		
-		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/style-switcher/style.switcher.js"></script>		
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/bootstrap/js/bootstrap.js"></script>		
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/nanoscroller/nanoscroller.js"></script>		
 		<script src="<?php echo base_url()."assets/themes/porto-admin/1.4.1/";?>assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>		

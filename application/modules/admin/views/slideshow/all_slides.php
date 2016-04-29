@@ -1,5 +1,14 @@
-<div class="padd">
-<a href="<?php echo site_url().'administration/add-slide';?>" class="btn btn-success pull-right">Add Slide</a>
+<section class="panel">
+    <header class="panel-heading">
+        <h2 class="panel-title"><?php echo $title;?></h2>
+    </header>
+    <div class="panel-body">
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-lg-12">
+                <a href="<?php echo site_url().'administration/add-slide';?>" class="btn btn-success pull-right">Add Slide</a>
+            </div>
+        </div>
+
 <?php	
 
 		$success = $this->session->userdata('success_message');
@@ -90,4 +99,5 @@
 				echo "There are no slides to display :-(";
 			}
 		?>
-</div>
+    	</div>
+    </section>

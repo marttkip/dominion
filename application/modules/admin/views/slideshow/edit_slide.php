@@ -1,4 +1,13 @@
-   
+<section class="panel">
+    <header class="panel-heading">
+        <h2 class="panel-title"><?php echo $title;?></h2>
+    </header>
+    <div class="panel-body">
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-lg-12">
+                <a href="<?php echo site_url().'website/slideshow';?>" class="btn btn-success pull-right">All slides</a>
+            </div>
+        </div>  
         <!-- Jasny -->
         <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
@@ -72,4 +81,5 @@
 				<?php
 					form_close();
 				?>
-		</div>
+    	</div>
+    </section>

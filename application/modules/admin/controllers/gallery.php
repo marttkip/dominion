@@ -67,6 +67,7 @@ class Gallery extends admin {
         $data["links"] = $this->pagination->create_links();
 		$query = $this->gallery_model->get_all_gallerys($table, $where, $config["per_page"], $page);
 		
+		$data['title'] = $v_data['title'] = 'All gallery images';
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
@@ -80,9 +81,8 @@ class Gallery extends admin {
 		{
 			$data['content'] = '<a href="'.site_url().'administration/add-gallery" class="btn btn-success pull-right">Add image</a>There are no gallery images';
 		}
-		$data['title'] = 'All gallery images';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function add_gallery()
@@ -139,10 +139,10 @@ class Gallery extends admin {
 		$v_data['error'] = $gallery_error;
 		$v_data['active_departments'] = $this->department_model->get_active_departments();
 		
+		$data['title'] = $v_data['title'] = 'Add Gallery';
 		$data['content'] = $this->load->view("gallery/add_gallery", $v_data, TRUE);
-		$data['title'] = 'Add Gallery';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
 	
 	function edit_gallery($gallery_id, $page)
@@ -215,10 +215,10 @@ class Gallery extends admin {
 		$v_data['error'] = $gallery_error;
 		$v_data['services'] = $this->service_model->get_active_services();
 		
+		$data['title'] = $v_data['title'] = 'Edit Gallery';
 		$data['content'] = $this->load->view("gallery/edit_gallery", $v_data, TRUE);
-		$data['title'] = 'Edit Gallery';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('templates/general_page', $data);
 	}
     
 	/*
