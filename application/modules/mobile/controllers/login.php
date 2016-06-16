@@ -28,12 +28,13 @@ class Login extends MX_Controller {
 		$this->load->model('login_model');
 		$this->load->model('email_model');
 		
-		$this->load->library('Mandrill', $this->config->item('mandrill_key'));
+		//$this->load->library('Mandrill', $this->config->item('mandrill_key'));
 	}
 	public function login_forum_member()
 	{
+		$this->form_validation->set_error_delimiters('', '');
 		$this->form_validation->set_rules('email_address', 'Email', 'trim|required|xss_clean');
-		// $this->form_validation->set_rules('member_no', 'Member No.', 'trim|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
 		//if form conatins invalid data
 		if ($this->form_validation->run())
@@ -42,8 +43,7 @@ class Login extends MX_Controller {
 			if($status == FALSE)
 			{
 				$response['message'] = 'fail';
-				$response['result'] = 'Unable to create account. Please try again'.$status;
-					
+				$response['result'] = 'Unable to access your account. Please ensure you have entered the correct details then try again';
 			}
 			
 			else
@@ -52,30 +52,22 @@ class Login extends MX_Controller {
 				$newdata = array(
 	                   'member_login_status'    => TRUE,
 	                   'member_email'     		=> $status[0]->member_email,
-	                   'member_no'     	=> $status[0]->member_no,
+	                   'member_no'     			=> $status[0]->member_no,
 	                   'member_name'  			=> $status[0]->member_name,
 	                   'date_of_birth'  			=> $status[0]->date_of_birth,
-	                   'member_id'  			=> $status[0]->member_id
+	                   'member_id'  			=> $status[0]->member_id,
+	                   'member_type_id'  			=> $status[0]->member_type_id
                 );
                 $this->session->set_userdata($newdata);
-                $age = 13;
-
-                if($age >= 10 AND $age <= 15)
-                {
-                	$response['level'] = 3;	
-                }
-                else if ($age >= 16 AND $age <= 17)
-                {
-                	$response['level'] = 3;	
-                }
-                 else if ($age >= 18 AND $age <= 25)
-                {
-                	$response['level'] = 3;	
-                }
-                else 
-                {
-                	$response['level'] = 3;	
-                }
+				
+				if($this->input->post('password') == '123456')
+				{
+					$newdata['first_login'] = 'yes';
+				}
+				else
+				{
+					$newdata['first_login'] = 'no';
+				}
 				$response['message'] = 'success';
 				$response['result'] = $newdata;	
 			}
@@ -102,6 +94,49 @@ class Login extends MX_Controller {
 		}
 		echo json_encode($response);
 
+	}
+	public function change_password()
+	{
+		$this->form_validation->set_error_delimiters('', '');
+		$this->form_validation->set_rules('email_address', 'Email Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[new_password]');
+
+		//if form conatins invalid data
+		if ($this->form_validation->run())
+		{
+			if($this->login_model->change_password())
+			{
+				$response['message'] = 'success';
+				$response['result'] = 'Your password has been changed successfully';	
+			}
+			
+			else
+			{
+				$response['message'] = 'fail';
+				$response['result'] = 'Unable to change your password. Please ensure that your current password is correct then try again.';
+			}
+		}
+		else
+		{
+			$validation_errors = validation_errors();
+			
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				$response['message'] = 'fail';
+			 	$response['result'] = $validation_errors;
+			}
+			
+			//populate form data on initial load of page
+			else
+			{
+				$response['message'] = 'fail';
+				$response['result'] = 'Ensure that you have entered all the values in the form provided';
+			}
+		}
+		echo json_encode($response);
 	}
 	public function get_client_profile()
 	{

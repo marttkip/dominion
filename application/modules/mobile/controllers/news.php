@@ -70,12 +70,53 @@ class News extends MX_Controller {
 	public function get_news_detail($id)
 	{
 		$query = $this->news_model->get_news_detail($id);
-		$v_data['comments_query'] = $this->news_model->get_post_comments($id);
 		
 		$v_data['query'] = $query;
 		$v_data['id'] = $id;
 		$response['message'] = 'success';
 		$response['result'] = $this->load->view('news_detail', $v_data, true);
+
+		
+		echo json_encode($response);
+
+	}
+	
+	public function get_news_comments($id)
+	{
+		$v_data['comments_query'] = $this->news_model->get_post_comments($id);
+		
+		$v_data['id'] = $id;
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('news_comments', $v_data, true);
+		
+		echo json_encode($response);
+	}
+	
+	public function get_forum_comments($id, $member_id)
+	{
+		$query = $this->news_model->get_news_detail($id);
+		
+		//post details
+		$post_title = $post_content = '';
+		if ($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$id = $row->post_id;
+			$post_title = $row->post_title;
+			
+			$post_content = $row->post_content;
+			$date = date('jS M Y',strtotime($row->created));
+			$day = date('j',strtotime($row->created));
+			$month = date('M',strtotime($row->created));
+		}
+		$response['post_title'] = $post_title;
+		$response['post_content'] = $post_content;
+		$v_data['comments_query'] = $this->news_model->get_post_comments($id);
+		
+		$v_data['id'] = $id;
+		$v_data['forum_member_id'] = $member_id;
+		$response['message'] = 'success';
+		$response['result'] = $this->load->view('forum_comments', $v_data, true);
 
 		
 		echo json_encode($response);
@@ -94,13 +135,14 @@ class News extends MX_Controller {
 	*	Add a new comment
 	*
 	*/
-	public function save_comment() 
+	public function add_comment() 
 	{
 		//form validation rules
 		$this->form_validation->set_rules('comment', 'Comment', 'required|xss_clean');
-		$this->form_validation->set_rules('name', 'Name', 'xss_clean');
+		//$this->form_validation->set_rules('name', 'Name', 'xss_clean');
+		$this->form_validation->set_rules('member_id', 'Member ID', 'xss_clean');
 		$this->form_validation->set_rules('post_id', 'post_id', 'xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'valid_email|xss_clean');
+		//$this->form_validation->set_rules('email', 'Email', 'valid_email|xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run() == FALSE)

@@ -21,14 +21,30 @@ class Login_model extends CI_Model
 	public function login_to_forum()
 	{
 		$this->db->select('*');
-		// $this->db->where('member_email = "'.$this->input->post('email_address').'" AND member_no ="'.$this->input->post('member_no').'"');
-		$this->db->where('member_email = "'.$this->input->post('email_address').'"');
+		$this->db->where('member_email = "'.$this->input->post('email_address').'" AND member_password ="'.md5($this->input->post('password')).'"');
 		$query = $this->db->get('member');
 
 		if($query->num_rows() > 0)
 		{
 			$row = $query->result();
 			return $row;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	public function change_password()
+	{
+		$this->db->select('*');
+		$this->db->where('member_email = "'.$this->input->post('email_address').'" AND member_password ="'.md5($this->input->post('current_password')).'"');
+		$query = $this->db->get('member');
+
+		if($query->num_rows() > 0)
+		{
+			$this->db->where('member_email = "'.$this->input->post('email_address').'" AND member_password ="'.md5($this->input->post('current_password')).'"');
+			$this->db->update('member', array('member_password' => md5($this->input->post('new_password'))));
+			return TRUE;
 		}
 		else
 		{

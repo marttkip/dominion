@@ -51,9 +51,9 @@ class News_model extends CI_Model
 	public function get_post_comments($post_id)
 	{
 		//retrieve all users
-		$this->db->from('post_comment');
-		$this->db->select('post_comment.*');
-		$this->db->where('post_comment_status = 1 AND post_id = '.$post_id);
+		$this->db->from('post_comment, member');
+		$this->db->select('post_comment.*, member.member_name');
+		$this->db->where('post_comment.member_id = member.member_id AND post_comment_status = 1 AND post_id = '.$post_id);
 		$this->db->order_by('comment_created', 'ASC');
 		$query = $this->db->get();
 		
@@ -70,8 +70,7 @@ class News_model extends CI_Model
 		$data = array(
 				'post_comment_description'=>$this->input->post('comment'),
 				'comment_created'=>date('Y-m-d H:i:s'),
-				'post_comment_user'=>$this->input->post('name'),
-				'post_comment_email'=>$this->input->post('email'),
+				'member_id'=>$this->input->post('member_id'),
 				'post_comment_status'=>1,
 				'post_id'=>$this->input->post('post_id')
 			);

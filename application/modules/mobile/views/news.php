@@ -14,11 +14,11 @@ if ($query->num_rows() > 0)
 		$day = date('j',strtotime($news_items_row->created));
 		$month = date('M',strtotime($news_items_row->created));
 		$post_image = $news_items_row->post_image;
-		$mini_string = (strlen($post_content) > 15) ? substr($post_content,0,300).'...' : $post_content;
+		$mini_string = (strlen($post_content) > 15) ? substr($post_content,0,100).'...' : $post_content;
 		$mini_title = (strlen($title) > 15) ? substr($title,0,50) : $title;
 		$news_item_post .='
 							<li class="item-content">
-						      <a href="#" class="item-link item-content">
+						      <a href="dist/event_detail.html" onClick="get_news_description('.$id.')" class="item-link item-content">
 						        	 <div class="content-block-inner">
 							          	<div class="article">
 							              <div class="article-header">

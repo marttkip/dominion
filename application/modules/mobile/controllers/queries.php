@@ -226,8 +226,8 @@ class Queries extends MX_Controller {
 			if($this->queries_model->post_contact_us())
 			{
 				
-					$response['message'] = 'success';
-					$response['result'] = 'Thank you for contact us, we will address your issue and get back to you shortly.';
+				$response['message'] = 'success';
+				$response['result'] = 'Thank you for contact us, we will address your issue and get back to you shortly.';
 				
 			}
 			

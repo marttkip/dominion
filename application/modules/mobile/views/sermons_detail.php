@@ -24,7 +24,7 @@ if ($query->num_rows() > 0)
 	<div class="page_content"> 
 		<blockquote>'.strip_tags($title).'</blockquote>
 		<div class="post_social2">
-			<a href="#" class="share_post"><img src="images/share.png" alt="" title="" /></a>              
+			<a href="#" class="share_post"><img src="images/share.png" alt="" title="" /></a> Share            
 		</div> 
 		<img src="'.base_url().'assets/img/posts/'.$post_image.'" alt="" title="" />';
 		if(!empty($post_audio))
